@@ -2,6 +2,8 @@
 
 🎄
 
+1. [Go](https://github.com/alex-schaaf/adventofcode2022/blob/main/day01/main.go) | [Python](https://github.com/alex-schaaf/adventofcode2022/blob/main/day01/main.py)
+
 ## Previous years
 
 - [2021](https://github.com/alex-schaaf/adventofcode2021)
