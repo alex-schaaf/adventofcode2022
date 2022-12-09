@@ -10,6 +10,7 @@
 6. [Python](https://github.com/alex-schaaf/adventofcode2022/blob/main/day06/main.py)
 7. [Python](https://github.com/alex-schaaf/adventofcode2022/blob/main/day07/main.py)
 8. [Python](https://github.com/alex-schaaf/adventofcode2022/blob/main/day08/main.py)
+9. [Python](https://github.com/alex-schaaf/adventofcode2022/blob/main/day09/main.py)
 
 ## Previous years
 
