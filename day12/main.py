@@ -28,16 +28,12 @@ class Node:
         return ascii_lowercase.index(elevation)
 
 
-def build_graph(lines: list[str]) -> list[Node]:
-    nodes: list[list[Node]] = []
-
-    # create Node objects for every elevation
-    for y, row in enumerate(lines):
-        row_nodes = []
-        for x, elevation in enumerate(row):
-            node = Node(elevation=elevation)
-            row_nodes.append(node)
-        nodes.append(row_nodes)
+def build_graph(lines: list[str]) -> set[Node]:
+    """
+    Build up graph based on the puzzle input lines and elevation-based
+    connectivity rules.
+    """
+    nodes = [[Node(elevation) for elevation in row] for row in lines]
 
     def maybe_add_neighbor(node: Node, neighbor: Node):
         if neighbor.elevation <= node.elevation + 1:
@@ -47,33 +43,37 @@ def build_graph(lines: list[str]) -> list[Node]:
     for y, row in enumerate(nodes):
         for x, node in enumerate(row):
             if x > 0:
-                neighbor = nodes[y][x - 1]
-                maybe_add_neighbor(node, neighbor)
+                maybe_add_neighbor(node, nodes[y][x - 1])
             if x < len(row) - 1:
-                neighbor = nodes[y][x + 1]
-                maybe_add_neighbor(node, neighbor)
+                maybe_add_neighbor(node, nodes[y][x + 1])
             if y > 0:
-                neighbor = nodes[y - 1][x]
-                maybe_add_neighbor(node, neighbor)
+                maybe_add_neighbor(node, nodes[y - 1][x])
             if y < len(nodes) - 1:
-                neighbor = nodes[y + 1][x]
-                maybe_add_neighbor(node, neighbor)
+                maybe_add_neighbor(node, nodes[y + 1][x])
 
-    return [node for row in nodes for node in row]
+    return {node for row in nodes for node in row}
 
 
 def breadth_first_search(start_node: Node) -> None:
+    """
+    Performs breadth first search from a given start Node by setting
+    the distance property on every Node to the distance travelled to
+    get there.
+    """
     queue: Queue[Node] = Queue()
+
     start_node.distance = 0
     queue.put(start_node)
 
     while not queue.empty():
         current_node = queue.get()
-        for neighbor_node in current_node.neighbors:
-            if neighbor_node.distance:
+
+        for neighbor in current_node.neighbors:
+            if neighbor.distance:
                 continue
-            neighbor_node.distance = current_node.distance + 1
-            queue.put(neighbor_node)
+
+            neighbor.distance = current_node.distance + 1
+            queue.put(neighbor)
 
 
 nodes = build_graph(lines)
