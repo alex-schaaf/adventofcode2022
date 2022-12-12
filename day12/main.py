@@ -7,30 +7,31 @@ with open(filepath, "r") as file:
     lines = [line.strip("\n") for line in file.readlines()]
 
 
-def parse_elevation(elevation: str) -> int:
-    if elevation == "S":
-        elevation = "a"
-    elif elevation == "E":
-        elevation = "z"
-    return ascii_lowercase.index(elevation)
-
-
 class Node:
-    def __init__(self, elevation: str, nodes=None) -> None:
-        self.elevation = parse_elevation(elevation)
+    def __init__(self, elevation: str) -> None:
+        self.elevation = self.parse_elevation(elevation)
         self.is_start = elevation == "S"
         self.is_target = elevation == "E"
-        self.neighbors: set[Node] = nodes or set()
-        self.visited = False
+        self.neighbors: set[Node] = set()
         self.distance: int | None = None
 
     def __repr__(self) -> str:
         return f"<Node elevation={self.elevation} distance={self.distance}>"
 
+    @staticmethod
+    def parse_elevation(elevation: str) -> int:
+        """Converts ascii lowercase elevation encoding into integer elevation (a=0, z=25)"""
+        if elevation == "S":
+            elevation = "a"
+        elif elevation == "E":
+            elevation = "z"
+        return ascii_lowercase.index(elevation)
+
 
 def build_graph(lines: list[str]) -> list[Node]:
     nodes: list[list[Node]] = []
 
+    # create Node objects for every elevation
     for y, row in enumerate(lines):
         row_nodes = []
         for x, elevation in enumerate(row):
@@ -38,24 +39,25 @@ def build_graph(lines: list[str]) -> list[Node]:
             row_nodes.append(node)
         nodes.append(row_nodes)
 
+    def maybe_add_neighbor(node: Node, neighbor: Node):
+        if neighbor.elevation <= node.elevation + 1:
+            node.neighbors.add(neighbor)
+
+    # add edges to every node
     for y, row in enumerate(nodes):
         for x, node in enumerate(row):
             if x > 0:
                 neighbor = nodes[y][x - 1]
-                if neighbor.elevation <= node.elevation + 1:
-                    node.neighbors.add(neighbor)
+                maybe_add_neighbor(node, neighbor)
             if x < len(row) - 1:
                 neighbor = nodes[y][x + 1]
-                if neighbor.elevation <= node.elevation + 1:
-                    node.neighbors.add(neighbor)
+                maybe_add_neighbor(node, neighbor)
             if y > 0:
                 neighbor = nodes[y - 1][x]
-                if neighbor.elevation <= node.elevation + 1:
-                    node.neighbors.add(neighbor)
+                maybe_add_neighbor(node, neighbor)
             if y < len(nodes) - 1:
                 neighbor = nodes[y + 1][x]
-                if neighbor.elevation <= node.elevation + 1:
-                    node.neighbors.add(neighbor)
+                maybe_add_neighbor(node, neighbor)
 
     return [node for row in nodes for node in row]
 
