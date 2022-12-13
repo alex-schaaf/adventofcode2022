@@ -1,19 +1,13 @@
-from pprint import pprint
 import ast
 
-filepath = "./test"
+filepath = "./input"
 
 with open(filepath, "r") as file:
     lines = [line.strip("\n") for line in file.readlines()]
 
 
-def parse(lines: list[str]):
-    lists = []
-    for line in lines:
-        if line == "":
-            continue
-        lists.append(ast.literal_eval(line))
-    return lists
+def parse(lines: list[str]) -> list:
+    return [ast.literal_eval(line) for line in lines if line]
 
 
 lists = parse(lines)
@@ -30,12 +24,11 @@ def compare_ints(left: int, right: int) -> bool | None:
 
 def compare_lists(list_a: list, list_b: list) -> bool | None:
     """
-    True -> right order
-    False -> wrong order
-    None -> continue
+    right order -> True
+    wrong order -> False
+    continue    -> None
     """
     for left, right in zip(list_a, list_b):
-        # print(f"  - Compare {left} vs {right}")
         if isinstance(left, int) and isinstance(right, int):
             result = compare_ints(left, right)
             if result is not None:
@@ -61,17 +54,29 @@ def compare_lists(list_a: list, list_b: list) -> bool | None:
         return False
 
 
+pairs = [(lists[i], lists[i + 1]) for i in range(0, len(lists), 2)]
 indices = []
-
-pairs = []
-for p in range(0, len(lists), 2):
-    pairs.append((lists[p], lists[p + 1]))
-
-
 for i, (list_a, list_b) in enumerate(pairs):
-    result = compare_lists(list_a, list_b)
-    if result is True:
+    if compare_lists(list_a, list_b):
         indices.append(i + 1)
 
 
 print(f"Puzzle 1: {sum(indices)}")
+
+divider_packets = [[[2]], [[6]]]
+lists += divider_packets
+
+modified = [True]
+while any(modified):
+    modified = []
+    for i in range(len(lists) - 1):
+        if compare_lists(lists[i], lists[i + 1]):
+            modified.append(False)
+        else:
+            lists[i], lists[i + 1] = lists[i + 1], lists[i]
+            modified.append(True)
+
+
+print(
+    f"Puzzle 2: {(lists.index(divider_packets[0]) + 1) * (lists.index(divider_packets[1]) + 1)}"
+)
