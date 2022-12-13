@@ -99,4 +99,35 @@ func main() {
 	})
 
 	fmt.Println("Puzzle 1:", nodes[len(nodes)-1].distance)
+
+	startingNodes := []*node{}
+	for _, node := range nodes {
+		if node.elevation == 0 {
+			startingNodes = append(startingNodes, node)
+		}
+	}
+
+	distances := []int{}
+	for _, startNode := range startingNodes {
+
+		for _, node := range nodes {
+			node.distance = -1
+		}
+
+		breadthFirstSearch(startNode)
+		for _, node := range nodes {
+			if node.isTarget && node.distance > 0 {
+				distances = append(distances, node.distance)
+			}
+		}
+	}
+
+	min := distances[0]
+	for _, distance := range distances {
+		if distance < min {
+			min = distance
+		}
+	}
+
+	fmt.Println("Puzzle 2:", min)
 }
