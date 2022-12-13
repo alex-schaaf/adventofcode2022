@@ -28,7 +28,9 @@
 | `./day04` |  4.6 ± 0.1 |      4.4 |      5.4 |     1.00 |
 | `./day12` | 85.5 ± 1.8 |     82.2 |     90.2 |     1.00 |
 
-Runtime measured using `hyperfine` on MacBook Pro 16-inch 2019 with 2,6 GHz 6-Core Intel Core i7 and 16 GB 2667 MHz DDR4 running macOS Ventura.
+Runtime measured using [`hyperfine`](https://github.com/sharkdp/hyperfine) on
+MacBook Pro 16-inch 2019 with 2,6 GHz 6-Core Intel Core i7 and 16 GB 2667 MHz
+DDR4 running macOS Ventura.
 
 ```
 hyperfine ./filename --export-markdown perf.md -N --warmup=10
