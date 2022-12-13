@@ -2,6 +2,8 @@
 
 🎄
 
+## Solutions
+
 1. [Go](https://github.com/alex-schaaf/adventofcode2022/blob/main/day01/main.go) | [Python](https://github.com/alex-schaaf/adventofcode2022/blob/main/day01/main.py) | [TypeScript](https://github.com/alex-schaaf/adventofcode2022/blob/main/day01/main.ts)
 2. [Go](https://github.com/alex-schaaf/adventofcode2022/blob/main/day02/main.go)
 3. [Go](https://github.com/alex-schaaf/adventofcode2022/blob/main/day03/main.go) | [Python](https://github.com/alex-schaaf/adventofcode2022/blob/main/day03/main.py)
@@ -15,6 +17,14 @@
 11. [Python](https://github.com/alex-schaaf/adventofcode2022/blob/main/day11/main.py)
 12. [Go](https://github.com/alex-schaaf/adventofcode2022/blob/main/day12/main.go) | [Python](https://github.com/alex-schaaf/adventofcode2022/blob/main/day12/main.py)
 13. [Python](https://github.com/alex-schaaf/adventofcode2022/blob/main/day13/main.py)
+
+## Performance
+
+| Day | Python [s] | Go [s] |
+| --- | ---------- | ------ |
+| 12  | 4.77       | 0.097  |
+
+Runtime measured using `time` on MacBook Pro 16-inch 2019 with 2,6 GHz 6-Core Intel Core i7 and 16 GB 2667 MHz DDR4 running macOS Ventura.
 
 ## Previous years
 
