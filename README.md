@@ -13,7 +13,7 @@
 9. [Python](https://github.com/alex-schaaf/adventofcode2022/blob/main/day09/main.py)
 10. [Python](https://github.com/alex-schaaf/adventofcode2022/blob/main/day10/main.py)
 11. [Python](https://github.com/alex-schaaf/adventofcode2022/blob/main/day11/main.py)
-12. [Python](https://github.com/alex-schaaf/adventofcode2022/blob/main/day12/main.py)
+12. [Go](https://github.com/alex-schaaf/adventofcode2022/blob/main/day12/main.go) | [Python](https://github.com/alex-schaaf/adventofcode2022/blob/main/day12/main.py)
 13. [Python](https://github.com/alex-schaaf/adventofcode2022/blob/main/day13/main.py)
 
 ## Previous years

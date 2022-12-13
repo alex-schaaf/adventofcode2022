@@ -33,3 +33,12 @@ func Sum(arr []int) int {
 	}
 	return sum
 }
+
+// Flatten a 2-dimensional slice.
+func Flatten[T any](lists [][]T) []T {
+	var res []T
+	for _, list := range lists {
+		res = append(res, list...)
+	}
+	return res
+}
