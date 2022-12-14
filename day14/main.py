@@ -1,6 +1,7 @@
 from collections import namedtuple, defaultdict
 from enum import Enum
 from typing import Generator
+from copy import deepcopy
 
 filepath = "./input"
 
@@ -28,20 +29,6 @@ def parse_lines(lines: list[str]) -> list[list[Point]]:
     return rock_lines
 
 
-def paint(world: dict[Point, Tile]) -> None:
-    print("    ", end="")
-    for x in range(10):
-        print(x, end=" ")
-    print("")
-    print("   " + "".join(["--" for _ in range(10)]))
-    for y in range(10):
-        print(y, end=" | ")
-        for x in range(10):
-            tile = world[Point(x + 494, y)]
-            print(tile.value, end=" ")
-        print("")
-
-
 rock_lines = parse_lines(lines)
 
 points = [p for rock_line in rock_lines for p in rock_line]
@@ -52,6 +39,21 @@ ys = [p.y for p in points]
 
 minX, maxX = min(xs), max(xs)
 minY, maxY = min(ys), max(ys)
+
+
+def paint(world: dict[Point, Tile]) -> None:
+    # print("    ", end="")
+    # for x in range(20):
+    #     print(x, end=" ")
+    # print("")
+    # print("   " + "".join(["--" for _ in range(10)]))
+    for y in range(10 + 2):
+        # print(y, end=" | ")
+        for x in range(20):
+            tile = world[Point(x + 489, y)]
+            print(tile.value, end=" ")
+        print("")
+
 
 print(f"\n{minX=} {maxX=} {minY=} {maxY=}\n")
 
@@ -72,33 +74,48 @@ def get_next_point(point: Point) -> Generator[Point, None, None]:
         yield Point(point.x + dx, point.y + dy)
 
 
-simulating = True
-grains = 0
-while simulating:
-    sand_start = Point(500, 0)
-    blocked = False
+def simulate(
+    world: dict[Point, Tile], y_offset: int = 0
+) -> tuple[dict[Point, Tile], int]:
+    simulating = True
+    grains = 0
+    while simulating:
+        sand_start = Point(500, 0)
+        blocked = False
 
-    current_point = sand_start
-    while not blocked:
-        for next_point in get_next_point(current_point):
-            if world[next_point] in [Tile.Rock, Tile.Sand]:
-                # print(next_point, "is blocked")
-                continue  # is blocked
-            else:
-                # print(next_point, "is free")
-                if next_point.y > maxY:
-                    simulating = False
-                    blocked = True
+        current_point = sand_start
+        while not blocked:
+            for next_point in get_next_point(current_point):
+                if world[next_point] in [Tile.Rock, Tile.Sand]:
+                    # print(next_point, "is blocked")
+                    continue  # is blocked
+                else:
+                    # print(next_point, "is free")
+                    if next_point.y > maxY + y_offset + 1:
+                        simulating = False
+                        blocked = True
+                        break
+                    current_point = next_point
                     break
-                current_point = next_point
-                break
-        else:  # all are blocked
-            # deposit sand
-            world[current_point] = Tile.Sand
-            # print(current_point, "deposited sand")
-            blocked = True
+            else:  # all are blocked
+                # deposit sand
+                if current_point.x == 500 and current_point.y == 0:
+                    simulating = False
+                world[current_point] = Tile.Sand
+                # print(current_point, "deposited sand")
+                blocked = True
 
-    grains += 1
+        grains += 1
+    return world, grains
 
-# paint(world)
+
+simulated_world, grains = simulate(deepcopy(world))
+
 print(f"\nPuzzle 1: {grains - 1}")
+
+
+for x in range(-1000, 1000):
+    world[Point(x, maxY + 2)] = Tile.Rock
+
+simulated_world, grains = simulate(world, y_offset=2)
+print(f"\nPuzzle 2: {grains}")
