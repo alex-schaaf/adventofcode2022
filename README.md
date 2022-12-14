@@ -4,6 +4,8 @@
 
 ## Solutions
 
+⚠️ Spoiler alert ⚠️
+
 1. [Go](https://github.com/alex-schaaf/adventofcode2022/blob/main/day01/main.go) | [Python](https://github.com/alex-schaaf/adventofcode2022/blob/main/day01/main.py) | [TypeScript](https://github.com/alex-schaaf/adventofcode2022/blob/main/day01/main.ts)
 2. [Go](https://github.com/alex-schaaf/adventofcode2022/blob/main/day02/main.go)
 3. [Go](https://github.com/alex-schaaf/adventofcode2022/blob/main/day03/main.go) | [Python](https://github.com/alex-schaaf/adventofcode2022/blob/main/day03/main.py)
@@ -18,6 +20,7 @@
 12. [Go](https://github.com/alex-schaaf/adventofcode2022/blob/main/day12/main.go) | [Python](https://github.com/alex-schaaf/adventofcode2022/blob/main/day12/main.py)
 13. [Python](https://github.com/alex-schaaf/adventofcode2022/blob/main/day13/main.py)
 14. [Python](https://github.com/alex-schaaf/adventofcode2022/blob/main/day14/main.py)
+    - Started out by using a 2-D array as a world map. This was a bad idea as it required either creating a very large array due to the action being centered around `x=500` or dealing with confusing offsets through the code. After scrapping that approach I used a `defaultdict` as a sparse matrix mapping points to tiles, only keeping track of the non-empty tiles.
 
 ## Performance
 
