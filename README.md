@@ -21,6 +21,9 @@
 13. [Python](https://github.com/alex-schaaf/adventofcode2022/blob/main/day13/main.py)
 14. [Python](https://github.com/alex-schaaf/adventofcode2022/blob/main/day14/main.py)
     - Started out by using a 2-D array as a world map. This was a bad idea as it required either creating a very large array due to the action being centered around `x=500` or dealing with confusing offsets through the code. After scrapping that approach I used a `defaultdict` as a sparse matrix mapping points to tiles, only keeping track of the non-empty tiles.
+15.
+16.
+17. [Python (Part 1)](https://github.com/alex-schaaf/adventofcode2022/blob/main/day17/main.py)
 
 ## Performance
 
