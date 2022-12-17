@@ -1,5 +1,4 @@
 from collections import defaultdict
-from dataclasses import dataclass
 
 filepath = "./test"
 
@@ -9,20 +8,24 @@ with open(filepath, "r") as file:
 
 CHAMBER_WIDTH = 7
 
-shapes = [
-    [(0, 0), (1, 0), (2, 0), (3, 0)],
-    [(1, 0), (0, 1), (1, 1), (2, 1), (1, 2)],
-    [(0, 0), (1, 0), (2, 0), (2, 1), (2, 2)],
-    [(0, 0), (0, 1), (0, 2), (0, 3)],
-    [(0, 0), (0, 1), (1, 0), (1, 1)],
-]
 
-
-@dataclass
 class Rock:
-    x: int
-    y: int
-    shape_idx: int
+    shapes = [
+        [(0, 0), (1, 0), (2, 0), (3, 0)],
+        [(1, 0), (0, 1), (1, 1), (2, 1), (1, 2)],
+        [(0, 0), (1, 0), (2, 0), (2, 1), (2, 2)],
+        [(0, 0), (0, 1), (0, 2), (0, 3)],
+        [(0, 0), (0, 1), (1, 0), (1, 1)],
+    ]
+
+    def __init__(self, x: int, y: int, shape_idx: int) -> None:
+        self.x = x
+        self.y = y
+        self._shape_idx = shape_idx
+
+    @property
+    def shape(self) -> list[tuple[int, int]]:
+        return self.__class__.shapes[self._shape_idx]
 
     def move(self, dx: int, dy: int) -> None:
         self.x += dx
@@ -30,14 +33,13 @@ class Rock:
 
 
 def create_rock(n_fallen_rocks: int, highest_y: int) -> Rock:
-    return Rock(2, highest_y + 4, n_fallen_rocks % len(shapes))
+    return Rock(2, highest_y + 4, n_fallen_rocks % len(Rock.shapes))
 
 
 def can_move(
     rock: Rock, d: tuple[int, int], world: dict[tuple[int, int], bool]
 ) -> bool:
-    shape = shapes[rock.shape_idx]
-    for (x, y) in shape:
+    for (x, y) in rock.shape:
         new_x = rock.x + x + d[0]
         new_y = rock.y + y + d[1]
         if new_y < 0 or new_x < 0 or new_x >= CHAMBER_WIDTH:
@@ -52,8 +54,7 @@ def paint(world: dict[tuple[int, int], bool], rock: Rock | None = None) -> None:
         print(f"{y:02d} |", end="")
         for x in range(CHAMBER_WIDTH):
             if rock:
-                shape = shapes[rock.shape_idx]
-                if (x - rock.x, y - rock.y) in shape:
+                if (x - rock.x, y - rock.y) in rock.shape:
                     print("@", end="")
                 else:
                     if world[(x, y)]:
@@ -74,6 +75,7 @@ jet_index = 0
 current_rock = None
 n_fallen_rocks = 0
 highest_y = -1
+
 while n_fallen_rocks < 2022:
     current_rock = create_rock(n_fallen_rocks, highest_y)
 
@@ -92,7 +94,7 @@ while n_fallen_rocks < 2022:
                 current_rock.move(*d)
         i += 1
 
-    for (x, y) in shapes[current_rock.shape_idx]:
+    for (x, y) in current_rock.shape:
         nx = current_rock.x + x
         ny = current_rock.y + y
         world[(nx, ny)] = True
