@@ -25,9 +25,9 @@
       around `x=500` or dealing with confusing offsets through the code. After
       scrapping that approach I used a `defaultdict` as a sparse matrix mapping
       points to tiles, only keeping track of the non-empty tiles. 15. 16.
-15. [Python (Part 1)](https://github.com/alex-schaaf/adventofcode2022/blob/main/day17/main.py)
+15.
 16.
-17.
+17. [Python (Part 1)](https://github.com/alex-schaaf/adventofcode2022/blob/main/day17/main.py)
 18. [Python](https://github.com/alex-schaaf/adventofcode2022/blob/main/day18/main.py)
     - Solved the first part without using a 3D array but rather a set of rock
       coordinate tuples, looping over them and checking if their direct
