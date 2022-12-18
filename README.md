@@ -16,7 +16,7 @@
 8. [Python](https://github.com/alex-schaaf/adventofcode2022/blob/main/day08/main.py)
 9. [Python](https://github.com/alex-schaaf/adventofcode2022/blob/main/day09/main.py)
 10. [Python](https://github.com/alex-schaaf/adventofcode2022/blob/main/day10/main.py)
-11. [Python](https://github.com/alex-schaaf/adventofcode2022/blob/main/day11/main.py)
+11. [Go](https://github.com/alex-schaaf/adventofcode2022/blob/main/day11/main.go) | [Python](https://github.com/alex-schaaf/adventofcode2022/blob/main/day11/main.py)
 12. [Go](https://github.com/alex-schaaf/adventofcode2022/blob/main/day12/main.go) | [Python](https://github.com/alex-schaaf/adventofcode2022/blob/main/day12/main.py)
 13. [Python](https://github.com/alex-schaaf/adventofcode2022/blob/main/day13/main.py)
 14. [Python](https://github.com/alex-schaaf/adventofcode2022/blob/main/day14/main.py)
@@ -24,7 +24,7 @@
       required either creating a very large array due to the action being centered
       around `x=500` or dealing with confusing offsets through the code. After
       scrapping that approach I used a `defaultdict` as a sparse matrix mapping
-      points to tiles, only keeping track of the non-empty tiles. 15. 16.
+      points to tiles, only keeping track of the non-empty tiles.
 15.
 16.
 17. [Python (Part 1)](https://github.com/alex-schaaf/adventofcode2022/blob/main/day17/main.py)
@@ -50,7 +50,7 @@
 | **Day 08** (py) | 286.8 ± 3.4 |    283.2 |    294.3 |
 | **Day 09** (py) | 420.2 ± 2.6 |    417.6 |    426.8 |
 | **Day 10** (py) | 210.3 ± 3.8 |    205.7 |    217.6 |
-| **Day 11** (py) | 11946 ± 353 |    11586 |    12748 |
+| **Day 11**      |  37.1 ± 0.3 |     36.5 |     37.9 |
 | **Day 12**      |  85.5 ± 1.8 |     82.2 |     90.2 |
 | **Day 13** (py) | 416.4 ± 1.7 |    414.3 |    420.2 |
 | **Day 14** (py) |   7893 ± 85 |     7775 |     8030 |

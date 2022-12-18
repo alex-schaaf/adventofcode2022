@@ -94,7 +94,7 @@ def drastically_adjust_worry_level(worry_level: int) -> int:
 
 
 for round in range(10_000):
-    for m, monkey in enumerate(monkeys):
+    for _, monkey in enumerate(monkeys):
         # logging.debug(f"Monkey {m}")
         while not monkey.items.empty():
             item = monkey.items.get()
