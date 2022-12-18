@@ -28,7 +28,7 @@
 15.
 16.
 17. [Python (Part 1)](https://github.com/alex-schaaf/adventofcode2022/blob/main/day17/main.py)
-18. [Python](https://github.com/alex-schaaf/adventofcode2022/blob/main/day18/main.py)
+18. [Go](https://github.com/alex-schaaf/adventofcode2022/blob/main/day18/main.go) | [Python](https://github.com/alex-schaaf/adventofcode2022/blob/main/day18/main.py)
     - Solved the first part without using a 3D array but rather a set of rock
       coordinate tuples, looping over them and checking if their direct
       neighbors are also in the set of rock coordinates. But this then led me to
@@ -38,14 +38,26 @@
 
 ## Performance
 
-| Command      |   Mean [ms] | Min [ms] | Max [ms] | Relative |
-| :----------- | ----------: | -------: | -------: | -------: |
-| `./day01`    |   4.4 ± 0.1 |      4.2 |      5.1 |     1.00 |
-| `./day02`    |   5.2 ± 0.1 |      5.0 |      5.7 |     1.00 |
-| `./day03`    |  10.2 ± 0.2 |     10.0 |     10.9 |     1.00 |
-| `./day04`    |   4.6 ± 0.1 |      4.4 |      5.4 |     1.00 |
-| `./day12`    |  85.5 ± 1.8 |     82.2 |     90.2 |     1.00 |
-| `./day13.py` | 416.4 ± 1.7 |    414.3 |    420.2 |     1.00 |
+| Day             |      Mean [ms] | Min [ms] | Max [ms] |
+| :-------------- | -------------: | -------: | -------: |
+| **Day 01**      |      4.4 ± 0.1 |      4.2 |      5.1 |
+| **Day 02**      |      5.2 ± 0.1 |      5.0 |      5.7 |
+| **Day 03**      |     10.2 ± 0.2 |     10.0 |     10.9 |
+| **Day 04**      |      4.6 ± 0.1 |      4.4 |      5.4 |
+| **Day 05** (py) |    175.1 ± 8.9 |    169.0 |    208.7 |
+| **Day 06** (py) |    166.8 ± 2.3 |    164.6 |    172.6 |
+| **Day 07** (py) |    169.8 ± 1.8 |    167.9 |    173.3 |
+| **Day 08** (py) |    286.8 ± 3.4 |    283.2 |    294.3 |
+| **Day 09** (py) |    420.2 ± 2.6 |    417.6 |    426.8 |
+| **Day 10** (py) |    210.3 ± 3.8 |    205.7 |    217.6 |
+| **Day 11** (py) | 11.946 ± 0.353 |   11.586 |   12.748 |
+| **Day 12**      |     85.5 ± 1.8 |     82.2 |     90.2 |
+| **Day 13** (py) |    416.4 ± 1.7 |    414.3 |    420.2 |
+| **Day 14**      |  7.893 ± 0.085 |    7.775 |    8.030 |
+| **Day 15**      |                |          |          |
+| **Day 16**      |                |          |          |
+| **Day 17**      |                |          |          |
+| **Day 18**      |     10.4 ± 0.2 |     10.0 |     11.2 |
 
 Runtime measured using [`hyperfine`](https://github.com/sharkdp/hyperfine) on
 MacBook Pro 16-inch 2019 with 2,6 GHz 6-Core Intel Core i7 and 16 GB 2667 MHz
