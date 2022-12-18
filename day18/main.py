@@ -87,13 +87,11 @@ def get_surface_area(cubes: frozenset[Cube]) -> int:
 
 def get_outer_surface_area(cubes: frozenset[Cube], grid: np.ndarray) -> int:
     surface = 0
-
     for cube in cubes:
         for dx, dy, dz in DIRECTIONS:
             p = cube.x + dx, cube.y + dy, cube.z + dz
             if in_bounds(grid, p) and grid[*p] == 2:
                 surface += 1
-
     return surface
 
 
@@ -111,4 +109,4 @@ if __name__ == "__main__":
     grid = fill(grid, (0, 0, 0))
 
     outer_surface_area = get_outer_surface_area(cubes, grid)
-    print(outer_surface_area)
+    print(f"Puzzle 2: {outer_surface_area}")
