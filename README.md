@@ -35,6 +35,13 @@
       to some weird attempts to flood fill the surroundings of each rock to
       check if it leaks to the outside. After a while it hit me to just flood
       fill a 3D array from the outside of the rock structure once 😅
+19.
+20.
+21.
+22.
+23. [Python (Part 1)](https://github.com/alex-schaaf/adventofcode2022/blob/main/day23/main.py)
+24.
+25.
 
 ## Performance
 
