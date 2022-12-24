@@ -1,12 +1,11 @@
 from collections import namedtuple
-from pprint import pprint
 
 filepath = "./input.txt"
 
 Location = namedtuple("Location", "x y")
 
 
-DIRECTIONS: list[tuple[tuple[Location, Location, Location], Location]] = [
+MOVE_DIRECTIONS: list[tuple[tuple[Location, Location, Location], Location]] = [
     (  # N, NE, or NW
         (Location(-1, -1), Location(0, -1), Location(1, -1)),
         Location(0, -1),
@@ -25,9 +24,8 @@ DIRECTIONS: list[tuple[tuple[Location, Location, Location], Location]] = [
     ),
 ]
 
-DIRECTIONS2 = [(x, y) for x in range(-1, 2) for y in range(-1, 2)]
-DIRECTIONS2.remove((0, 0))
-# pprint(DIRECTIONS2)
+NEIGHBOR_DIRECTIONS = [(x, y) for x in range(-1, 2) for y in range(-1, 2)]
+NEIGHBOR_DIRECTIONS.remove((0, 0))
 
 
 def parse(lines: list[str]) -> set[Location]:
@@ -44,7 +42,7 @@ def _get_proposal(
     locations: Location,
 ) -> Location | None:
     neighbors = []
-    for (dx, dy) in DIRECTIONS2:
+    for (dx, dy) in NEIGHBOR_DIRECTIONS:
         if Location(loc.x + dx, loc.y + dy) in locations:
             neighbors.append(True)
         else:
@@ -53,7 +51,7 @@ def _get_proposal(
         return None
 
     targets = []
-    for directions, t in DIRECTIONS:
+    for directions, t in MOVE_DIRECTIONS:
         for dloc in directions:
             proposal = Location(loc.x + dloc.x, loc.y + dloc.y)
             if proposal in locations:
@@ -109,9 +107,6 @@ def move(
             # no valid proposal was available, stay in place!
             new_locations.add(current_loc)
         elif list(proposals.values()).count(proposal_loc) > 1:
-            # print(
-            #     f"{list(proposals.values()).count(proposal_loc)} want to go to {proposal_loc}"
-            # )
             # more than one elve want to move here, stay in place!
             new_locations.add(current_loc)
         else:
@@ -123,34 +118,32 @@ def move(
 if __name__ == "__main__":
     with open(filepath, "r") as file:
         lines = [line.strip("\n") for line in file.readlines()]
-
     locations = parse(lines)
-    # pprint(locations)
-    # paint(locations, len(lines[0]), len(lines))
 
-    for i in range(10):
-
+    round = 0
+    while True:
         proposals = propose(locations)
         newLocations = move(locations, proposals)
 
         if locations == newLocations:
+            print(f"Puzzle 2: {round+1}")
             break
 
         locations = newLocations
-        # print(f"\n== End of Round {i + 1} ==")
-        # paint(locations, len(lines[0]), len(lines))
-        DIRECTIONS = DIRECTIONS[1:] + [DIRECTIONS[0]]
-        # pprint([d[1] for d in DIRECTIONS])
+        MOVE_DIRECTIONS = MOVE_DIRECTIONS[1:] + [MOVE_DIRECTIONS[0]]
 
-    xs = [loc.x for loc in locations]
-    ys = [loc.y for loc in locations]
+        if round == 9:
+            xs = [loc.x for loc in locations]
+            ys = [loc.y for loc in locations]
 
-    count = 0
-    for y in range(min(ys), max(ys) + 1):
-        for x in range(min(xs), max(xs) + 1):
-            if Location(x, y) in locations:
-                continue
-            else:
-                count += 1
+            count = 0
+            for y in range(min(ys), max(ys) + 1):
+                for x in range(min(xs), max(xs) + 1):
+                    if Location(x, y) in locations:
+                        continue
+                    else:
+                        count += 1
 
-    print(f"Puzzle 1: {count}")
+            print(f"Puzzle 1: {count}")
+
+        round += 1
