@@ -38,7 +38,7 @@
 19.
 20.
 21.
-22.
+22. [Python (Part 1)](https://github.com/alex-schaaf/adventofcode2022/blob/main/day22/main.py)
 23. [Python (Part 1)](https://github.com/alex-schaaf/adventofcode2022/blob/main/day23/main.py)
 24.
 25.
